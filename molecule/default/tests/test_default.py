@@ -1,14 +1,17 @@
 import os
 
+import pytest
+
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_hosts_file(host):
-    f = host.file('/etc/hosts')
+@pytest.mark.parametrize("version", [
+    "v1.3.0",
+])
+def test_hosts_file(host, version):
+    s = host.check_output('ddev version')
 
-    assert f.exists
-    assert f.user == 'root'
-    assert f.group == 'root'
+    assert version in s
