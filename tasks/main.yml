@@ -28,7 +28,7 @@
     dest: "{{ ddev_tmp_dir }}/{{ ddev_filename }}"
     remote_src: true
 
-- name: Copy the expanded binary to the install directory.
+- name: Copy the binary to the install directory.
   copy:
     src: "{{ ddev_tmp_dir }}/{{ ddev_filename }}/ddev"
     dest: "{{ ddev_install_dir }}/ddev"
