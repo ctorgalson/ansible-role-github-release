@@ -3,7 +3,7 @@ galaxy_info:
   author: Christopher Torgalson
   description: This role can be used to download and install command-line utilities directly from Github releases.
 
-  role_name: github-releases
+  role_name: releases
 
   license: GPLv3
 
