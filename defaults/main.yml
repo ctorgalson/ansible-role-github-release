@@ -1,14 +1,16 @@
 ---
 # defaults file for ansible-role-github-release
 
-ghr:
-  user: "drud"
-  project: "ddev"
-  version: "v1.3.0"
-  # Used in constructing download URL. Should be one of "linux", "macos", or
-  # "windows".
-  os: "linux"
-  # Which archive to download, `.zip` or `.tar.gz`.
-  compression: "tar.gz"
-  tmp_dir: "/tmp"
-  install_dir: "/usr/local/bin/"
+# Directory to download release files to.
+ghr_tmp_dir: "/tmp"
+
+# Directory to install utilities to.
+ghr_install_dir: "/usr/local/bin"
+
+# List of Github releases to download, extract, and install.
+ghr_releases: []
+#  - url: "https://github.com/drud/ddev/releases/download/v1.3.0/ddev_linux.v1.3.0.tar.gz"
+#    checksum: "sha256:https://github.com/drud/ddev/releases/download/v1.3.0/ddev_linux.v1.3.0.tar.gz.sha256.txt"
+#    extract_dir: "ddev_linux.v1.3.0"
+#    copy_src: "{{ ghr_tmp_dir }}/ddev_linux.v1.3.0/ddev"
+#    copy_dest: "{{ ghr_install_dir }}/ddev"

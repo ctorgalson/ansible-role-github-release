@@ -1,0 +1,35 @@
+---
+# Install tasks for ansible-role-github-release
+
+- name: Determine filetype.
+  set_fact:
+    release_filetype: "{{ (release.url | basename | splitext)[1] }}"
+
+- name: Download and verify file.
+  get_url:
+    url: "{{ release.url }}"
+    checksum: "{{ release.checksum | default(omit) }}"
+    dest: "{{ ghr_tmp_dir }}"
+  register: release_download
+
+- name: Extract the file if necessary.
+  block:
+    - name: Create a directory to extract into.
+      file:
+        path: "{{ ghr_tmp_dir }}/{{ release.extract_dir }}"
+        state: directory
+
+    - name: Extract the archive.
+      unarchive:
+        src: "{{ release_download.dest }}"
+        dest: "{{ ghr_tmp_dir }}/{{ release.extract_dir }}"
+        remote_src: true
+
+  when: "release_filetype in ['.gz', '.zip']"
+
+- name: Copy the binary to the install directory.
+  copy:
+    src: "{{ release.copy_src }}"
+    dest: "{{ release.copy_dest }}"
+    mode: "ugo+x"
+    remote_src: true
