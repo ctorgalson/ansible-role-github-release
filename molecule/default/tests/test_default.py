@@ -11,7 +11,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize("version", [
     "v1.3.0",
 ])
-def test_hosts_file(host, version):
+def test_release(host, version):
     s = host.check_output('ddev version')
 
     assert version in s

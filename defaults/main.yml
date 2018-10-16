@@ -1,12 +1,13 @@
 ---
-# defaults file for ansible-role-ddev
+# defaults file for ansible-role-github-release
 
-ddev_url: "https://github.com/drud/ddev/releases/download"
-ddev_latest_version: "v1.3.0"
+ghr_user: "drud"
+ghr_project: "ddev"
+ghr_latest_version: "v1.3.0"
 # Used in constructing download URL. Should be one of "linux", "macos", or
 # "windows".
-ddev_os: "linux"
+ghr_os: "linux"
 # Which archive to download, `.zip` or `.tar.gz`.
-ddev_compression: "tar.gz"
-ddev_tmp_dir: "/tmp"
-ddev_install_dir: "/usr/local/bin/"
+ghr_compression: "tar.gz"
+ghr_tmp_dir: "/tmp"
+ghr_install_dir: "/usr/local/bin/"
