@@ -1,5 +1,23 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    ghr_tmp_dir: "/tmp"
+    ghr_install_dir: "/usr/local/bin"
+    ghr_releases:
+      # Install hostess: https://github.com/cbednarski/hostess
+      - url: "https://github.com/cbednarski/hostess/releases/download/v0.3.0/hostess_linux_amd64"
+        copy_src: "{{ ghr_tmp_dir }}/hostess_linux_amd64"
+        copy_dest: "{{ ghr_install_dir }}/hostess"
+      # Install drush: https://github.com/drush-ops/drush
+      - url: "https://github.com/drush-ops/drush/releases/download/8.1.17/drush.phar"
+        copy_src: "{{ ghr_tmp_dir }}/drush.phar"
+        copy_dest: "{{ ghr_install_dir }}/drush"
+      # Install ddev: https://github.com/drud/ddev
+      - url: "https://github.com/drud/ddev/releases/download/v1.3.0/ddev_linux.v1.3.0.tar.gz"
+        checksum: "sha256:https://github.com/drud/ddev/releases/download/v1.3.0/ddev_linux.v1.3.0.tar.gz.sha256.txt"
+        extract_dir: "ddev_linux.v1.3.0"
+        copy_src: "{{ ghr_tmp_dir }}/ddev_linux.v1.3.0/ddev"
+        copy_dest: "{{ ghr_install_dir }}/ddev"
   roles:
     - role: ansible-role-github-release
