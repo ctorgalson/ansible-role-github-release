@@ -1,2 +1,12 @@
 ---
 # defaults file for ansible-role-ddev
+
+ddev_url: "https://github.com/drud/ddev/releases/download"
+ddev_latest_version: "v1.3.0"
+# Used in constructing download URL. Should be one of "linux", "macos", or
+# "windows".
+ddev_os: "linux"
+# Which archive to download, `.zip` or `.tar.gz`.
+ddev_compression: "tar.gz"
+ddev_tmp_dir: "/tmp"
+ddev_install_dir: "/usr/local/bin/"

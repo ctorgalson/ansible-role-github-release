@@ -1,2 +1,36 @@
 ---
 # tasks file for ansible-role-ddev
+
+- name: Determine the download base path.
+  set_fact:
+    ddev_filebase: "{{ ddev_url }}/{{ ddev_latest_version }}"
+    ddev_filename: "ddev_{{ ddev_os }}.{{ ddev_latest_version }}"
+
+- name: Determine the download file name.
+  set_fact:
+    ddev_tarball: "{{ ddev_filebase }}/{{ ddev_filename }}.{{ ddev_compression }}"
+    ddev_checksum: "sha256:{{ ddev_filebase }}/{{ ddev_filename }}.{{ ddev_compression }}.sha256.txt"
+
+- name: Download and verify file.
+  get_url:
+    url: "{{ ddev_tarball }}"
+    checksum: "{{ ddev_checksum }}"
+    dest: "{{ ddev_tmp_dir }}"
+
+- name: Create a directory to extract into.
+  file:
+    path: "{{ ddev_tmp_dir }}/{{ ddev_filename }}"
+    state: directory
+
+- name: Extract the archive.
+  unarchive:
+    src: "{{ ddev_tmp_dir }}/{{ ddev_filename }}.{{ ddev_compression }}"
+    dest: "{{ ddev_tmp_dir }}/{{ ddev_filename }}"
+    remote_src: true
+
+- name: Copy the expanded binary to the install directory.
+  copy:
+    src: "{{ ddev_tmp_dir }}/{{ ddev_filename }}/ddev"
+    dest: "{{ ddev_install_dir }}/ddev"
+    mode: "ugo+x"
+    remote_src: true
