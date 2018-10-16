@@ -1,0 +1,13 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install dependencies.
+      apt:
+        name: "{{ package }}"
+      loop:
+        - php
+        - php-cli
+        - unzip
+      loop_control:
+        loop_var: package
