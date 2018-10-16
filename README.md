@@ -17,7 +17,7 @@ This role can be used to download and install command-line utilities directly fr
 
 ## Dependencies
 
-The Ansible [Unarchive module](http://docs.ansible.com/ansible/latest/modules/unarchive_module.html#unarchive-module) (used in this role) "requires gtar/unzip command on target host."
+The Ansible [Unarchive module](http://docs.ansible.com/ansible/latest/modules/unarchive_module.html#unarchive-module) (used in this role to extract .zip and .tar.gz release files) "requires gtar/unzip command on target host."
 
 ## Example Playbook
 
