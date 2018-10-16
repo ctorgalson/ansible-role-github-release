@@ -3,38 +3,38 @@
 
 - name: Determine download url.
   set_fact:
-    ghr_url: "https://github.com/{{ ghr_user }}/{{ ghr_project }}/releases/download"
+    ghr_url: "https://github.com/{{ ghr.user }}/{{ ghr.project }}/releases/download"
 
 - name: Determine the download base path.
   set_fact:
-    ghr_filebase: "{{ ghr_url }}/{{ ghr_latest_version }}"
-    ghr_filename: "{{ ghr_project }}_{{ ghr_os }}.{{ ghr_latest_version }}"
+    ghr_filebase: "{{ ghr_url }}/{{ ghr.version }}"
+    ghr_filename: "{{ ghr.project }}_{{ ghr.os }}.{{ ghr.version }}"
 
 - name: Determine the download file name.
   set_fact:
-    ghr_tarball: "{{ ghr_filebase }}/{{ ghr_filename }}.{{ ghr_compression }}"
-    ghr_checksum: "sha256:{{ ghr_filebase }}/{{ ghr_filename }}.{{ ghr_compression }}.sha256.txt"
+    ghr_tarball: "{{ ghr_filebase }}/{{ ghr_filename }}.{{ ghr.compression }}"
+    ghr_checksum: "sha256:{{ ghr_filebase }}/{{ ghr_filename }}.{{ ghr.compression }}.sha256.txt"
 
 - name: Download and verify file.
   get_url:
     url: "{{ ghr_tarball }}"
     checksum: "{{ ghr_checksum }}"
-    dest: "{{ ghr_tmp_dir }}"
+    dest: "{{ ghr.tmp_dir }}"
 
 - name: Create a directory to extract into.
   file:
-    path: "{{ ghr_tmp_dir }}/{{ ghr_filename }}"
+    path: "{{ ghr.tmp_dir }}/{{ ghr_filename }}"
     state: directory
 
 - name: Extract the archive.
   unarchive:
-    src: "{{ ghr_tmp_dir }}/{{ ghr_filename }}.{{ ghr_compression }}"
-    dest: "{{ ghr_tmp_dir }}/{{ ghr_filename }}"
+    src: "{{ ghr.tmp_dir }}/{{ ghr_filename }}.{{ ghr.compression }}"
+    dest: "{{ ghr.tmp_dir }}/{{ ghr_filename }}"
     remote_src: true
 
 - name: Copy the binary to the install directory.
   copy:
-    src: "{{ ghr_tmp_dir }}/{{ ghr_filename }}/{{ ghr_project }}"
-    dest: "{{ ghr_install_dir }}/{{ ghr_project }}"
+    src: "{{ ghr.tmp_dir }}/{{ ghr_filename }}/{{ ghr.project }}"
+    dest: "{{ ghr.install_dir }}/{{ ghr.project }}"
     mode: "ugo+x"
     remote_src: true

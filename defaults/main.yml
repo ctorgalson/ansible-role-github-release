@@ -1,13 +1,14 @@
 ---
 # defaults file for ansible-role-github-release
 
-ghr_user: "drud"
-ghr_project: "ddev"
-ghr_latest_version: "v1.3.0"
-# Used in constructing download URL. Should be one of "linux", "macos", or
-# "windows".
-ghr_os: "linux"
-# Which archive to download, `.zip` or `.tar.gz`.
-ghr_compression: "tar.gz"
-ghr_tmp_dir: "/tmp"
-ghr_install_dir: "/usr/local/bin/"
+ghr:
+  user: "drud"
+  project: "ddev"
+  version: "v1.3.0"
+  # Used in constructing download URL. Should be one of "linux", "macos", or
+  # "windows".
+  os: "linux"
+  # Which archive to download, `.zip` or `.tar.gz`.
+  compression: "tar.gz"
+  tmp_dir: "/tmp"
+  install_dir: "/usr/local/bin/"
