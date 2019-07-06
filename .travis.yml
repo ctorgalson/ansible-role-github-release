@@ -8,8 +8,8 @@ before_install:
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
 install:
   - pip install testinfra
-  - pip install molecule
   - pip install docker
+  - pip install molecule
 script:
   # Replace with `molecule --debug test` for verbose debugging.
   - molecule test
