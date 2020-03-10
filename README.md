@@ -1,6 +1,7 @@
 # Ansible Role Github Release
 
-[![Build Status](https://travis-ci.com/ctorgalson/ansible-role-github-release.svg?branch=master)](https://travis-ci.com/ctorgalson/ansible-role-github-release)
+![](https://github.com/ctorgalson/ansible-role-github-release/workflows/Molecule%20Test/badge.svg)
+
 
 This role can be used to download and install command-line utilities directly from Github releases.
 
