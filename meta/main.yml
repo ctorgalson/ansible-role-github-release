@@ -13,6 +13,9 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - xenial
+    - name: Debian
+      versions:
+        - bullseye
 
   galaxy_tags:
     - git
